@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+  <h1>List Examples</h1>
+
+  <div>
+    <h2 id="E1">Simple list example</h2>
+    <div>
+      <p>Uninteresting stuff</p>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+      <p>Arbitrary content</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E2">Item with content following collect content</h2>
+    <div>
+      <p>Uninteresting stuff before a broken list</p>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <p>Para ff in item 1</p>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+      <p>Other arbitrary content, followed by a second list</p>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item, second list</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <p>Para ff in item 1, second list</p>
+        </li>
+        <li>
+          <p>2nd item, second list</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E3">Item with multiple sequences of collect and other elements</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+          <p>Para 2</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 1</p>
+      </div>
+      <div class="box" data-meta="collect">
+        <p>Hint 2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <p>Para 3</p>
+          <p>Para 4</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 3</p>
+      </div>
+      <div class="box" data-meta="collect">
+        <p>Hint 4</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <p>Para 5</p>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E4">Item in sublist receives collect content</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+          <ol>
+            <li id="1.1">
+              <p>Sublist item</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint, should be added to li id="1.1"</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E5">Item in sublist, more sublist content follows collect content</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+          <ol>
+            <li id="1.1">
+              <p>Sublist item</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint to be added to li id="1.1"</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="1.1" data-meta="listitem=continue">
+              <p>Para following hint, still in id="1.1"</p>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <p>2nd item, level 1</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E6">Item in sublist, new item follows item with collect content</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+          <ol>
+            <li id="1.1">
+              <p>Sublist item</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="1.2">
+              <p>2nd sublist item</p>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7">Item in sublist, sublist follows sublist with collect content</h2>
+    <div>
+      <ol id="ol1" data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+          <ol id="ol1.1">
+            <li id="1.1">
+              <p>Sublist item</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol id="ol1.2">
+            <li id="1b.1">
+              <p>Item in 2nd sublist</p>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7a">Collect content on level 1, then level 2</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li id="li1">
+          <p>1st item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint into li1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li1" data-meta="listitem=continue">
+          <p>Item in 1st item</p>
+        </li>
+        <li id="li2">
+          <p>2nd item</p>
+          <ol>
+            <li id="li2.1">
+              <p>Item in sublist</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint in li2.1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="li2.1" data-meta="listitem=continue">
+              <p>ff Item in sublist</p>
+            </li>
+          </ol>
+        </li>
+        <li id="li3">
+          <p>3rd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7b">Collect content on level 2, then level 1</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li id="li1">
+          <p>1st item</p>
+          <ol>
+            <li id="li1.1">
+              <p>Item in sublist</p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint in li1.1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="li1.1" data-meta="listitem=continue">
+              <p>ff para in sublist</p>
+            </li>
+          </ol>
+        </li>
+        <li id="li2">
+          <p>2nd item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint into li2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li2" data-meta="listitem=continue">
+          <p>ff para in 2nd item</p>
+        </li>
+        <li id="li3">
+          <p>3rd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E8">Collect content as first element in item (here additionally in very first item)</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li data-meta="listitem=empty">
+          <p/>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <p>1st item</p>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E9">Sequence of two items with collect content only</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+        </li>
+        <li data-meta="listitem=empty">
+          <p/>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 1</p>
+      </div>
+      <div class="box" data-meta="collect">
+        <p>Hint 2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=empty">
+          <p/>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint 3</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li>
+          <p>4th item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E10">Legacy as last element in complete list</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li>
+          <p>1st item</p>
+        </li>
+        <li>
+          <p>2nd item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint</p>
+      </div>
+      <ol data-meta="listlevel=end">
+        <li>
+          <p/>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+</div>
