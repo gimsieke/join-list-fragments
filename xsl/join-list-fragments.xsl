@@ -17,7 +17,7 @@
                                and . is (parent::li/parent::ol/li/*)[1]]">
         <xsl:for-each-group select="current-group()" group-adjacent="(my:list-level(.), -1)[1] = 0">
           <!-- Exclude the uninteresting paras before, in between, and after lists.
-          For interesting elements, my:list-level() is greater than 1 or empty (for the collect
+          For interesting elements, my:list-level() is greater than 0 or empty (for the collect
           elements, but also for continuing list item content) -->
           <xsl:choose>
             <xsl:when test="current-grouping-key()">
