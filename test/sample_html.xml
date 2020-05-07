@@ -108,14 +108,14 @@
         <li>
           <p>1st item</p>
           <ol>
-            <li id="1.1">
+            <li id="li1.1">
               <p>Sublist item</p>
             </li>
           </ol>
         </li>
       </ol>
       <div class="box" data-meta="collect">
-        <p>Hint, should be added to li id="1.1"</p>
+        <p>Hint, should be added to li id="li1.1"</p>
       </div>
       <ol data-meta="listlevel=continue">
         <li>
@@ -194,7 +194,7 @@
         <li>
           <p>1st item</p>
           <ol id="ol1.1">
-            <li id="1.1">
+            <li id="li1.1">
               <p>Sublist item</p>
             </li>
           </ol>
@@ -206,7 +206,7 @@
       <ol data-meta="listlevel=continue">
         <li data-meta="listitem=continue">
           <ol id="ol1.2">
-            <li id="1b.1">
+            <li id="li1.2">
               <p>Item in 2nd sublist</p>
             </li>
           </ol>
@@ -249,7 +249,7 @@
         <li data-meta="listitem=continue">
           <ol data-meta="listlevel=continue">
             <li id="li2.1" data-meta="listitem=continue">
-              <p>ff Item in sublist</p>
+              <p>ff para in sublist</p>
             </li>
           </ol>
         </li>
@@ -286,6 +286,147 @@
         </li>
         <li id="li2">
           <p>2nd item</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint into li2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li2" data-meta="listitem=continue">
+          <p>ff para in 2nd item</p>
+        </li>
+        <li id="li3">
+          <p>3rd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7c">Collect content on level 3, then level 1</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li id="li1">
+          <p>1st item</p>
+          <ol>
+            <li id="li1.1">
+              <p>Para in sublist 2</p>
+              <ol>
+                <li id="li1.1.1">
+                  <p>Para in sublist 3 followed by div</p>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint in li1.1.1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li1" data-meta="listitem=continue">
+          <p>ff para in sublist 1 -- illegal by definition, maybe included at a different level</p>
+        </li>
+        <li id="li2">
+          <p>2nd item level 1</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint into li2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li2" data-meta="listitem=continue">
+          <p>ff para in 2nd item</p>
+        </li>
+        <li id="li3">
+          <p>3rd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7d">Collect content on level 3, then level 2</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li id="li1">
+          <p>1st item</p>
+          <ol>
+            <li id="li1.1">
+              <p>Para in sublist 2</p>
+              <ol>
+                <li id="li1.1.1">
+                  <p>para in sublist 3, followed by div</p>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint in li1.1.1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="li1.1" data-meta="listitem=continue">
+              <p>ff para in sublist 2 -- illegal by definition, maybe included at a different level</p>
+            </li>
+          </ol>
+        </li>
+        <li id="li2">
+          <p>2nd item level 1</p>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint into li2</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li id="li2" data-meta="listitem=continue">
+          <p>ff para in 2nd item</p>
+        </li>
+        <li id="li3">
+          <p>3rd item</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <h2 id="E7e">Collect content on level 3, then level 3</h2>
+    <div>
+      <ol data-meta="listlevel=start">
+        <li id="li1">
+          <p>1st item</p>
+          <ol>
+            <li id="li1.1">
+              <p>Para in sublist 2</p>
+              <ol>
+                <li id="li1.1.1">
+                  <p>para in sublist 3, followed by div</p>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="box" data-meta="collect">
+        <p>Hint in li1.1.1</p>
+      </div>
+      <ol data-meta="listlevel=continue">
+        <li data-meta="listitem=continue">
+          <ol data-meta="listlevel=continue">
+            <li id="li1.1" data-meta="listitem=continue">
+              <ol data-meta="listlevel=continue">
+                <li id="li1.1.1" data-meta="listitem=continue">
+                  <p>ff para in sublist 3 belongs to li1.1.1</p>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li id="li2">
+          <p>2nd item level 1</p>
         </li>
       </ol>
       <div class="box" data-meta="collect">

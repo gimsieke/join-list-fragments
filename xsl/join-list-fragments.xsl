@@ -5,6 +5,7 @@
   exclude-result-prefixes="my xs">
   
   <xsl:mode on-no-match="shallow-copy"/>
+  <xsl:output indent="yes"/>
 
   <xsl:include href="debug.xsl"/>
   
@@ -15,10 +16,12 @@
         group-starting-with="*[parent::li[not(@data-meta='listitem=empty')]
                                   /parent::ol/@data-meta = ('listlevel=start', 'listlevel=end')
                                and . is (parent::li/parent::ol/li/*)[1]]">
+<!--        <xsl:comment select="'GROUP1 / pos', position(), 'starting with', serialize(.)"/>-->
         <xsl:for-each-group select="current-group()" group-adjacent="(my:list-level(.), -1)[1] = 0">
           <!-- Exclude the uninteresting paras before, in between, and after lists.
           For interesting elements, my:list-level() is greater than 0 or empty (for the collect
           elements, but also for continuing list item content) -->
+<!--          <xsl:comment select="'GROUP2 at level', my:list-level(.)"/>-->
           <xsl:choose>
             <xsl:when test="current-grouping-key()">
               <xsl:copy-of select="current-group()"/>
@@ -59,17 +62,20 @@
       <!-- ol -->
       <xsl:copy-of select="@*"/>
       <xsl:for-each-group select="current-group()" group-starting-with="*[my:list-level(.) = $depth]">
+<!--        <xsl:comment select="'depth', $depth, 'GROUP3 / pos', position(), 'starting with', serialize(.)"/>-->
         <xsl:copy select="..">
           <!-- li -->
           <xsl:copy-of select="@*"/>
           <xsl:choose>
             <xsl:when test="exists(current-group()[my:list-level(.) gt $depth])">
               <xsl:for-each-group select="current-group()" group-adjacent="not(my:list-level(.) = $depth)">
+<!--                <xsl:comment select="'depth', $depth, 'GROUP4 at level', my:list-level(.)"/>-->
                 <xsl:choose>
                   <xsl:when test="current-grouping-key()">
                     <xsl:for-each-group select="current-group()" 
                       group-starting-with="*[parent::li/parent::ol[not(@data-meta)]
-                                             and . is parent::li/*[1]]">
+                                             and . is (ancestor::ol[@data-meta]//*[empty(self::li | self::ol)])[1]]">
+<!--                      <xsl:comment select="'depth', $depth, 'GROUP5 / pos',position(),'starting with', serialize(.)"/>-->
                       <!-- we might need to consider @start-level (the number of total ancestor ol elements minus
                         the number of data-meta-less ancestor ol elements) that is calculated in debug.xsl -->  
                       <xsl:call-template name="collect">
