@@ -68,9 +68,11 @@
               <xsl:for-each-group select="current-group()" group-adjacent="not(my:list-level(.) = $depth)">
                 <xsl:choose>
                   <xsl:when test="current-grouping-key()">
+                    <!-- If it were not for <ol id="ol1.2"> in E7, the following grouping would be unnecessary.
+                    It corresponds to start-level="2" in the debugging output. -->
                     <xsl:for-each-group select="current-group()" 
                       group-starting-with="*[parent::li/parent::ol[not(@data-meta)]
-                                             and . is (ancestor::ol[@data-meta]//*[empty(self::li | self::ol)])[1]]">
+                                             and . is (ancestor::ol[@data-meta][1]//*[empty(self::li | self::ol)])[1]]">
                       <xsl:call-template name="collect">
                         <xsl:with-param name="depth" select="$depth + 1"/>
                       </xsl:call-template>  

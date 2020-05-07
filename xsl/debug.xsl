@@ -34,7 +34,7 @@
         <xsl:attribute name="start" select="'true'"/>
       </xsl:if>
       <xsl:if test="parent::li/parent::ol[not(@data-meta)]
-                    and . is parent::li/*[1]">
+                    and . is (ancestor::ol[@data-meta][1]//*[empty(self::li | self::ol)])[1]">
         <xsl:attribute name="start-level" 
           select="count(ancestor::ol) - count(ancestor::ol[not(@data-meta)]) + 1"/>
       </xsl:if>
