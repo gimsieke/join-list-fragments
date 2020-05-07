@@ -9,22 +9,20 @@
 
   <xsl:include href="debug.xsl"/>
   
-  <xsl:template match="*[ol[@data-meta = 'listlevel=start']]">
+  <xsl:template match="*[ol[@data-meta = 'listlevel=start']]" mode="#default">
     <xsl:copy>
-      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:for-each-group select="my:atomic-items(.)" 
         group-starting-with="*[parent::li[not(@data-meta='listitem=empty')]
-                                  /parent::ol/@data-meta = ('listlevel=start', 'listlevel=end')
+                                  /parent::ol/@data-meta = ('listlevel=start')
                                and . is (parent::li/parent::ol/li/*)[1]]">
-<!--        <xsl:comment select="'GROUP1 / pos', position(), 'starting with', serialize(.)"/>-->
         <xsl:for-each-group select="current-group()" group-adjacent="(my:list-level(.), -1)[1] = 0">
           <!-- Exclude the uninteresting paras before, in between, and after lists.
           For interesting elements, my:list-level() is greater than 0 or empty (for the collect
           elements, but also for continuing list item content) -->
-<!--          <xsl:comment select="'GROUP2 at level', my:list-level(.)"/>-->
           <xsl:choose>
             <xsl:when test="current-grouping-key()">
-              <xsl:copy-of select="current-group()"/>
+              <xsl:apply-templates select="current-group()" mode="#current"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:call-template name="collect"/>
@@ -37,7 +35,7 @@
   
   <xsl:function name="my:atomic-items" as="node()*">
     <xsl:param name="context" as="element()"/>
-    <xsl:sequence select="  innermost($context/descendant::li/*)
+    <xsl:sequence select="  innermost($context/descendant::li/*[empty(ancestor::ol[@data-meta = 'listlevel=end'])])
                           | outermost($context/descendant::*[empty(ancestor-or-self::ol)])"/>
   </xsl:function>
   
@@ -62,40 +60,37 @@
       <!-- ol -->
       <xsl:copy-of select="@*"/>
       <xsl:for-each-group select="current-group()" group-starting-with="*[my:list-level(.) = $depth]">
-<!--        <xsl:comment select="'depth', $depth, 'GROUP3 / pos', position(), 'starting with', serialize(.)"/>-->
         <xsl:copy select="..">
           <!-- li -->
           <xsl:copy-of select="@*"/>
           <xsl:choose>
             <xsl:when test="exists(current-group()[my:list-level(.) gt $depth])">
               <xsl:for-each-group select="current-group()" group-adjacent="not(my:list-level(.) = $depth)">
-<!--                <xsl:comment select="'depth', $depth, 'GROUP4 at level', my:list-level(.)"/>-->
                 <xsl:choose>
                   <xsl:when test="current-grouping-key()">
                     <xsl:for-each-group select="current-group()" 
                       group-starting-with="*[parent::li/parent::ol[not(@data-meta)]
                                              and . is (ancestor::ol[@data-meta]//*[empty(self::li | self::ol)])[1]]">
-<!--                      <xsl:comment select="'depth', $depth, 'GROUP5 / pos',position(),'starting with', serialize(.)"/>-->
-                      <!-- we might need to consider @start-level (the number of total ancestor ol elements minus
-                        the number of data-meta-less ancestor ol elements) that is calculated in debug.xsl -->  
                       <xsl:call-template name="collect">
                         <xsl:with-param name="depth" select="$depth + 1"/>
                       </xsl:call-template>  
                     </xsl:for-each-group>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:copy-of select="current-group()"/>
+                    <xsl:apply-templates select="current-group()" mode="#current"/>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:for-each-group>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:copy-of select="current-group()"/>
+              <xsl:apply-templates select="current-group()" mode="#current"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:copy>
       </xsl:for-each-group>
     </xsl:copy>
   </xsl:template>
+  
+  <xsl:template match="li[@data-meta = 'listitem=empty']/*" mode="#default"/>
   
 </xsl:stylesheet>
